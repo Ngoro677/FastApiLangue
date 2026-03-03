@@ -16,10 +16,11 @@ async def create_user(
     body: UserCreate,
     db: AsyncSession = Depends(get_db),
 ) -> UserResponse:
-    """Crée un utilisateur (email unique)."""
+    """Crée un utilisateur ou retourne l'existant si l'email est déjà enregistré (get-or-create)."""
     result = await db.execute(select(User).where(User.email == body.email))
-    if result.scalar_one_or_none():
-        raise HTTPException(status_code=400, detail="Email already registered")
+    existing = result.scalar_one_or_none()
+    if existing:
+        return UserResponse.model_validate(existing)
     user = User(email=body.email)
     db.add(user)
     await db.flush()
