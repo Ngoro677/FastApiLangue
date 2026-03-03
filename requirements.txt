@@ -1,0 +1,21 @@
+# FastAPI & server
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+python-multipart>=0.0.6
+
+# Database
+sqlalchemy[asyncio]>=2.0.25
+asyncpg>=0.29.0
+
+# Config
+pydantic-settings>=2.1.0
+
+# HTTP client for GROQ
+httpx>=0.26.0
+
+# Validation
+pydantic[email-validator]>=2.5.0
+email-validator>=2.0.0
+
+# OpenAI (Whisper STT)
+openai>=1.12.0
